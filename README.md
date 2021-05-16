@@ -12,14 +12,3 @@ http://localhost:9080/fetch/data?pin=12345
 http://localhost:9080/reportBoard
 
 
-+--------------+------------------+------+-----+-------------------+----------------+
-| Field        | Type             | Null | Key | Default           | Extra          |
-+--------------+------------------+------+-----+-------------------+----------------+
-| id           | int(10) unsigned | NO   | PRI | NULL              | auto_increment |
-| name         | varchar(150)     | NO   |     | NULL              |                |
-| address      | varchar(150)     | NO   |     | NULL              |                |
-| pin          | varchar(150)     | NO   |     | NULL              |                |
-| phone_number | varchar(150)     | NO   |     | NULL              |                |
-| photo        | longblob         | YES  |     | NULL              |                |
-| report_time  | datetime         | NO   |     | CURRENT_TIMESTAMP |                |
-+--------------+------------------+------+-----+-------------------+----------------+
