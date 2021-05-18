@@ -10,7 +10,8 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="/css/base.css">
+	
 
 <style type="text/css">
 #map {
@@ -38,34 +39,32 @@ body {
 	</div>
 
 
-	<form action="/reportBoard" method="post" enctype="multipart/form-data">
-		        
-		<div>
+    <form class="login" action="/reportBoard" method="post" enctype="multipart/form-data">
+  <div class="login">
+  <div class="login-header">
+    <h1>Please fill in all the details to proceed</h1>
+  </div>
+  <div class="login-form">
+    <h3>Name:</h3>
+    <input type="text" name="name" placeholder="Name" required/><br>
+    
+    <h3>Address:</h3>
+    <input type="text" name="address" placeholder="Address" required/>
+    <h3>Pin:</h3>
+    <input type="text" name="pin" placeholder="Pin" required/><br>
+    <h3>Conatct Number:</h3>
+    <input type="text" name="phone_number" placeholder="Mob" required/>
+    <br>
+    <h3>Photo:</h3>
+    <br>
+    <input class="uploadBtn" type="file" name="image" accept="image/png, image/jpeg" required/><br><br>
+    <br>
+    <input type="submit" value="Submit" class="login-button"/>
+    <br>
+  </div>
+</div>
 
-			<div class="form-group">
-				<label>name</label> <input type="text" name="name" required/>
-
-			</div>
-			<div class="form-group">
-				<label>Address</label> <input type="text" name="address" required/>
-			</div>
-			<div class="form-group">
-				<label>pin</label> <input type="text" name="pin" required/>
-
-			</div>
-
-			<div class="form-group">
-				<label>phone</label> <input type="text" name="phone_number" required/>
-			</div>
-			          <label>Photos: </label>     <input type="file" name="image"
-				accept="image/png, image/jpeg" required/>           
-		</div>
-		    
-		<div>
-			<input type="submit" value="Submit" name="submit">
-		</div>
-
-	</form>
+</form>
 
 
 
