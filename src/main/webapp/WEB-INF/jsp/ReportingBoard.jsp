@@ -7,6 +7,12 @@
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <title>Clean City</title>
+<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+<script type="text/javascript" src='/js/test-credentials.js'></script>    
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -48,10 +54,21 @@ body {
     <h3>Name:</h3>
     <input type="text" name="name" placeholder="Name" required/><br>
     
+    <h3 for="types">Type of incident:</h3>
+	<select name="types" id="type">
+	  <option value="garbage">Garbage</option>
+	  <option value="pothole">Pothole</option>
+	</select>
+    
     <h3>Address:</h3>
     <input type="text" name="address" placeholder="Address" required/>
     <h3>Pin:</h3>
     <input type="text" name="pin" placeholder="Pin" required/><br>
+    
+    <div id="map" style="height: 250px;width: 250px;margin-left: 50px;"></div>
+    <input id="longitude" name="longitude" hidden="hidden"/>
+    <input id="latitude" name="latitude" hidden="hidden"/>
+    
     <h3>Conatct Number:</h3>
     <input type="text" name="phone_number" placeholder="Mob" required/>
     <br>
@@ -67,9 +84,8 @@ body {
 </form>
 
 
-
-
 	<div id="errorMessage"></div>
-
+	
+	<script type="text/javascript" src="/js/mapLoader.js"></script>
 </body>
 </html>
