@@ -41,6 +41,12 @@ public class DashBoardController {
 		return "ReportingBoard";
 
 	}
+	
+	@GetMapping("/ticketBoard")
+	public String ticketBoard() {
+		return "TicketBoard";
+
+	}
 
 	@PostMapping("/reportBoard")
 	public String uploadForm(Complaint form, @RequestParam("image") MultipartFile file, Model model) {
@@ -61,10 +67,11 @@ public class DashBoardController {
 
 			if (cleanCityService.insertComplaint(complaint) == 1) {
 
-				status = "SUCCESS";
+				status = "Your ticket has been logged sucessfully!!";
 			} else {
-				status = "FAILED";
+				status = "Ticket logging failed due to technical issues. Please try again after sometime.";
 			}
+			model.addAttribute("ticketId", cleanCityService.getTicketID());
 			model.addAttribute("status", status);
 
 		} catch (Exception e) {
