@@ -17,6 +17,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/base.css">
+<script src="/js/garbageReport.js"></script>
 	
 
 <style type="text/css">
@@ -32,9 +33,6 @@
 	height: 400px;
 }
 
-body {
-	margin-left: 3% !important;
-}
 </style>
 </head>
 <body id="markers-on-the-map">
@@ -54,8 +52,8 @@ body {
     <h3>Name:</h3>
     <input type="text" name="name" placeholder="Name" required/><br>
     
-    <h3 for="types">Type of incident:</h3>
-	<select name="types" id="type">
+    <h3 for="type">Type of incident:</h3>
+	<select name="type" id="type">
 	  <option value="garbage">Garbage</option>
 	  <option value="pothole">Pothole</option>
 	</select>
@@ -77,6 +75,8 @@ body {
     <br>
     <input class="uploadBtn" type="file" name="image" accept="image/png, image/jpeg" required/><br><br>
     <br>
+    <a id="submitReport">Have already raised a ticket?
+    </a><br><br>
     <input type="submit" value="Submit" class="login-button"/>
     <br>
   </div>
