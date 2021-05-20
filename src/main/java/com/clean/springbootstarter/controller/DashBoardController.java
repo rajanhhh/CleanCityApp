@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.clean.springbootstarter.beans.UserInfo;
+import com.clean.springbootstarter.beans.Complaint;
+import com.clean.springbootstarter.beans.Complaint;
 
 @Controller
 public class DashBoardController {
@@ -41,7 +43,7 @@ public class DashBoardController {
 	}
 
 	@PostMapping("/reportBoard")
-	public String uploadForm(UserInfo form, @RequestParam("image") MultipartFile file, Model model) {
+	public String uploadForm(Complaint form, @RequestParam("image") MultipartFile file, Model model) {
 		String status = "";
 		FileInputStream fin  = null;
 
@@ -53,10 +55,11 @@ public class DashBoardController {
 			// FileInputStream fin = new
 			// FileInputStream("/home/bhruguraj/Pictures/test.png");
 			// System.out.println(fin);
-			UserInfo userInfo = new UserInfo(form.getName(), form.getAddress(), form.getPin(), form.getPhone_number(),
-					fin);
+			//Complaint complaint = new Complaint(form.getName(), form.getAddress(), form.getPin(), form.getPhone_number(),fin);
+			Complaint complaint = new Complaint(0, form.getType(), form.getName(), form.getAddress(),
+				form.getPin(), form.getPhone_number(), fin, form.getLongitude(), form.getLatitude());
 
-			if (cleanCityService.insertUserInfo(userInfo) == 1) {
+			if (cleanCityService.insertComplaint(complaint) == 1) {
 
 				status = "SUCCESS";
 			} else {
@@ -79,9 +82,9 @@ public class DashBoardController {
 		ModelAndView map = new ModelAndView("cleanCityInfo");
 		try {
 
-			List<UserInfo> userEntries = cleanCityService.fetchUserInfoByPin(pin);
+			List<Complaint> complaints = cleanCityService.fetchComplaintByPin(pin);
 			ObjectMapper Obj = new ObjectMapper();
-			String jsonStr = Obj.writeValueAsString(userEntries);
+			String jsonStr = Obj.writeValueAsString(complaints);
 
 			map.addObject("personList", jsonStr);
 
@@ -106,16 +109,16 @@ public class DashBoardController {
 		ModelAndView model = new ModelAndView("cleanCityInfo");
 		try {
 
-			List<UserInfo> userEntries = cleanCityService.fetchUserInfoWithImage(pin);
+			List<Complaint> complaints = cleanCityService.fetchComplaintByPin(pin);
 			// ObjectMapper Obj = new ObjectMapper();
 			// String jsonStr = Obj.writeValueAsString(userEntries);
-			model.addObject("name", userEntries.get(0).getName());
-			model.addObject("address", userEntries.get(0).getAddress());
-			model.addObject("phone", userEntries.get(0).getPhone_number());
-			model.addObject("pin", userEntries.get(0).getPin());
+			model.addObject("name", complaints.get(0).getName());
+			model.addObject("address", complaints.get(0).getAddress());
+			model.addObject("phone", complaints.get(0).getPhone_number());
+			model.addObject("pin", complaints.get(0).getPin());
 			// model.addAttribute("photo", jsonStr);
-			if(null!=userEntries.get(0).getPhoto()) {
-			InputStream inputStream = userEntries.get(0).getPhoto();
+			if(null!=complaints.get(0).getPhoto()) {
+			InputStream inputStream = complaints.get(0).getPhoto();
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			byte[] buffer = new byte[4096];
 			int bytesRead = -1;
@@ -142,5 +145,31 @@ public class DashBoardController {
 		return model;
 
 	}
+	
+	@RequestMapping("/reportMap")
+	public String report(Model model) {
+		return "reportMap";
+	} 
+
+	@RequestMapping("/getComplaintList")
+	@ResponseBody
+	public String getComplaintList() {
+		List<Complaint> complaints =cleanCityService.getAllComplaintsWithoutImage();
+		ObjectMapper Obj = new ObjectMapper(); 
+		String jsonStr=null;
+		try {
+			jsonStr = Obj.writeValueAsString(complaints);
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonStr;
+	} 
 
 }
