@@ -14,7 +14,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<script src="/js/reportPopulator.js"></script>
+	<script src="/js/reportPopulatorScript.js"></script>
 	
     <style type="text/css">
     #map {
@@ -47,6 +47,6 @@
 	<div id ="errorMessage"></div>
     <div id="map"></div>
 
-    <script type="text/javascript" src="/js/mapLoader.js"></script>
+    <script type="text/javascript" src="/js/reportMapLoader.js"></script>
   </body>
 </html>

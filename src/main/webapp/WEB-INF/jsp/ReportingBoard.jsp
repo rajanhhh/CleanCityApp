@@ -65,11 +65,12 @@ body {
     <h3>Pin:</h3>
     <input type="text" name="pin" placeholder="Pin" required/><br>
     
-    <div id="map" style="height: 250px;width: 250px;margin-left: 50px;"></div>
+    <h3>Please select exact location:</h3>
+    <div id="map" style="height: 250px;width: 400px;margin-left: 50px;"></div>
     <input id="longitude" name="longitude" hidden="hidden"/>
     <input id="latitude" name="latitude" hidden="hidden"/>
     
-    <h3>Conatct Number:</h3>
+    <h3>Contact Number:</h3>
     <input type="text" name="phone_number" placeholder="Mob" required/>
     <br>
     <h3>Photo:</h3>
@@ -86,6 +87,6 @@ body {
 
 	<div id="errorMessage"></div>
 	
-	<script type="text/javascript" src="/js/mapLoader.js"></script>
+	<script type="text/javascript" src="/js/locationSelectorMapLoader.js"></script>
 </body>
 </html>
