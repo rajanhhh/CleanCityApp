@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
 import com.clean.springbootstarter.beans.Complaint;
@@ -50,6 +51,14 @@ public class cleanCityService {
 						resultSet.getString("latitude")));
 
 		return complaints;
+	}
+	
+	public int getTicketID() {
+
+		String sql = "SELECT max(id) FROM cleancity_records";
+		int ticketId;
+		ticketId = jdbcTemplate.queryForObject(sql, new Object[] {}, Integer.class);
+		return ticketId;
 	}
 
 	/**
