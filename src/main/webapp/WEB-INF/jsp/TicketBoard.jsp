@@ -47,7 +47,7 @@ body {
   </div>
   <div class="login-form">
       <h3>Ticket ID:</h3>
-    <input type="text" name="name" placeholder="Ticket ID" required/><br>
+    <input type="text" name="ticketId" id="ticketId" placeholder="Ticket ID" required/><br>
     <br>
     <input type="submit" value="Search" class="login-button"/>
     <br>
