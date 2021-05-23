@@ -42,6 +42,11 @@ public class DashBoardController {
 
 	}
 	
+	@GetMapping("/fetch")
+	public String fetchBoard() {
+		return "cleanCityInfo";
+	}
+	
 	@GetMapping("/ticketBoard")
 	public String ticketBoard() {
 		return "TicketBoard";
@@ -110,23 +115,25 @@ public class DashBoardController {
 	}
 
 	@GetMapping("/fetch/data")
-	public ModelAndView fetchData(@RequestParam("pin") String pin) {
+	@ResponseBody
+	public String fetchData(@RequestParam("pin") String pin,@RequestParam("start_date")String start_date,@RequestParam("end_date")String end_date) {
 
-		ModelAndView map = new ModelAndView("cleanCityInfo");
+		//ModelAndView map = new ModelAndView();
+		String jsonStr = "";
 		try {
 
-			List<Complaint> complaints = cleanCityService.fetchComplaintByPin(pin);
+			List<Complaint> complaints = cleanCityService.fetchComplaintByPin(pin,start_date,end_date);
 			ObjectMapper Obj = new ObjectMapper();
-			String jsonStr = Obj.writeValueAsString(complaints);
+			jsonStr = Obj.writeValueAsString(complaints);
 
-			map.addObject("personList", jsonStr);
+			//map.addObject("responseText", jsonStr);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return map;
+		return jsonStr;
 
 	}
 	
@@ -137,18 +144,19 @@ public class DashBoardController {
 	 */
 
 	@GetMapping("/fetch/demo")
-	public ModelAndView fetchDemo(@RequestParam("pin") String pin) {
+	public ModelAndView fetchDemo(@RequestParam("pin") String pin,@RequestParam("start_date")String start_date,@RequestParam("end_date")String end_date) {
 
 		ModelAndView model = new ModelAndView("cleanCityInfo");
 		try {
 
-			List<Complaint> complaints = cleanCityService.fetchComplaintByPin(pin);
+			List<Complaint> complaints = cleanCityService.fetchComplaintWithImage(pin,start_date,end_date);
 			// ObjectMapper Obj = new ObjectMapper();
 			// String jsonStr = Obj.writeValueAsString(userEntries);
 			model.addObject("name", complaints.get(0).getName());
 			model.addObject("address", complaints.get(0).getAddress());
 			model.addObject("phone", complaints.get(0).getPhone_number());
 			model.addObject("pin", complaints.get(0).getPin());
+			model.addObject("ComplaintSubmissionDate", complaints.get(0).getComplaintSubmissionDate());
 			// model.addAttribute("photo", jsonStr);
 			if(null!=complaints.get(0).getPhoto()) {
 			InputStream inputStream = complaints.get(0).getPhoto();
@@ -184,7 +192,7 @@ public class DashBoardController {
 		return "reportMap";
 	} 
 
-	@RequestMapping("/getComplaintList")
+	/*@RequestMapping("/getComplaintList")
 	@ResponseBody
 	public String getComplaintList() {
 		List<Complaint> complaints =cleanCityService.getAllComplaintsWithoutImage();
@@ -203,6 +211,6 @@ public class DashBoardController {
 			e.printStackTrace();
 		}
 		return jsonStr;
-	} 
+	} */
 
 }
