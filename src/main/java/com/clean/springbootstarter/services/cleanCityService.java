@@ -61,6 +61,14 @@ public class cleanCityService {
 		return ticketId;
 	}
 
+	public String getTicketStatus(String ticketId) {
+
+		String sql = "SELECT current_status FROM cleancity_records where id= " + ticketId;
+		String status="";
+		status = jdbcTemplate.queryForObject(sql, new Object[] {}, String.class);
+		return status;
+	}
+
 	/**
 	 * insert cleancity data into table.
 	 */

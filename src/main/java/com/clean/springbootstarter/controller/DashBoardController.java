@@ -47,6 +47,32 @@ public class DashBoardController {
 		return "TicketBoard";
 
 	}
+	
+	@PostMapping("/ticketBoard")
+	public String getTicketStatus(String ticketId, Model model) {
+		String status = cleanCityService.getTicketStatus(ticketId);
+		if(status!=null) {
+			if(status.equalsIgnoreCase("A")) {
+				status= "Your ticket has been acknowledged successfully. Prompt action will be taken as soon as possible. Thank you!!";
+			}
+			else if(status.equalsIgnoreCase("D")) {
+				status= "Your ticket has been closed successfully.Enjoy the cleanliness!!";
+			}
+			else if(status.equalsIgnoreCase("P")) {
+				status= "Your ticket will be acknowledged as soon as our manpower is ready. It has not been acknowledged yet.";
+			}
+			else {
+				status= "Something went wrong. We could not fetch the status of your ticket. Please try again after sometime.";
+			}
+		}
+		else {
+			status= "Something went wrong. We could not fetch the status of your ticket. Please try again after sometime.";
+		}
+		model.addAttribute("status", status);
+
+		return "TicketResult";
+
+	}
 
 	@PostMapping("/reportBoard")
 	public String uploadForm(Complaint form, @RequestParam("image") MultipartFile file, Model model) {
