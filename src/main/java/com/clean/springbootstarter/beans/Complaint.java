@@ -12,6 +12,8 @@ public class Complaint {
 	private InputStream photo;
 	private String longitude;
 	private String latitude;
+	private String ComplaintSubmissionDate;
+	private String status;
 
 	public Complaint() {
 		
@@ -31,8 +33,7 @@ public class Complaint {
 		this.latitude = latitude;
 	}
 
-	public Complaint(int id, String type, String name, String address, String pin, String phone_number,
-			String longitude, String latitude) {
+	public Complaint(int id, String type, String name, String address, String pin, String phone_number, String ComplaintSubmissionDate,String status) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -40,8 +41,17 @@ public class Complaint {
 		this.address = address;
 		this.pin = pin;
 		this.phone_number = phone_number;
-		this.longitude = longitude;
-		this.latitude = latitude;
+		this.ComplaintSubmissionDate=ComplaintSubmissionDate;
+		if(status.equals("P"))
+			this.status = "In-Progress";
+		else if(status.equals("A"))
+			this.status = "Acknowledged";
+		else if(status.equals("D"))
+			this.status = "Done";
+		else
+			this.status = status;
+		
+		
 	}
 
 	public  Complaint(String name, String address,String pin,String phone_number, InputStream photo) {
@@ -114,6 +124,15 @@ public  Complaint(String name, String address,String pin,String phone_number) {
 	public String getPin() {
 		return pin;
 	}
+	
+	public String getComplaintSubmissionDate() {
+		return ComplaintSubmissionDate;
+	}
+
+	public void setComplaintSubmissionDate(String complaintSubmissionDate) {
+		ComplaintSubmissionDate = complaintSubmissionDate;
+	}
+
 
 	public void setPin(String pin) {
 		this.pin = pin;
@@ -135,6 +154,12 @@ public  Complaint(String name, String address,String pin,String phone_number) {
 		this.type = type;
 	}
 	
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }

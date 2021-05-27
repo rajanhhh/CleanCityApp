@@ -64,7 +64,7 @@
     <input type="text" name="pin" placeholder="Pin" required/><br>
     
     <h3>Please select exact location:</h3>
-    <div id="map" style="height: 250px;width: 400px;margin-left: 50px;"></div>
+    <div id="map" style="height: 250px;width: 600px;margin-left: 50px;"></div>
     <input id="longitude" name="longitude" hidden="hidden"/>
     <input id="latitude" name="latitude" hidden="hidden"/>
     
